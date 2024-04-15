@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block title %} Red Hot Groove {% endblock %}
+{% block content %}
+<script defer src="/static/js/index.js"></script>
+<link rel="stylesheet" href="/static/css/home.css">
+<section class="home" id="home">
+    <section class="spotify-playlists">
+        <form action="/get_tops" method="post">
+            <button type="submit" name='id' value="top_tracks" class="playlists">
+            <img style=" border-radius: 30px;"src="{{top_image}}" height="200px" width='200px'>
+            <h2 id="playlist_name"> Top Tracks </h2>
+            </button>
+            {% for element in top_artists %}
+            <button name="id" value="{{element['id']}}" class="playlists">
+                <img style=" border-radius: 30px;" src="{{element['images'][0]['url']}}" height="200px" width='200px'>
+                <h2 id="playlist_name">{{element['name'] + " Top20"}}</h2>
+            </button>
+            {% endfor %}
+        </form>
+    </section>
+</section>
+{% endblock %}

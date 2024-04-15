@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Library{% endblock %}
+{% block content %}
+<style>
+    .content { /* Altezza desiderata del contenuto scrollabile */
+        overflow-y: hidden;
+        align-items: center;
+        margin-bottom: 150px;
+        min-height: 100vh;
+      }
+</style>
+<section class="playlist">
+    <div class="header">
+    <img src="{{playlist['images'][0]['url']}}" height="300px" width="300px">
+    <h2>{{playlist['name']}}</h2>
+    </div>
+    <section class="songs">
+    <!--form action="{{get_track}}" method="post"-->
+    {% for element in playlist['tracks']['items'] %}
+        <button name="song_id" value="{{element['track']['preview_url']}}" class="song">
+            <img src="{{element['track']['album']['images'][0]['url']}}"
+            height="100px" 
+            width="100px">
+            <div class="text">
+            <h3 class="track-name">{{element['track']['name']}}</h4>
+            <h4 class="artist">{{element['track']['artists'][0]['name']}}</h3>
+            </div>
+        </button>
+    {% endfor %}
+    <!--/form-->
+    </section>
+</section>
+{% endblock %}

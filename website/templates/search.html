@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} Red Hot Groove {% endblock %}
+{% block content %}
+<style>
+    .content { /* Altezza desiderata del contenuto scrollabile */
+        overflow-y: hidden;
+        align-items: center;
+        margin-bottom: 150px;
+        min-height: 100vh;
+      }
+</style>
+<section class="search_section" id="search_section">
+    <h1> Results for {{query}} </h1>
+      <h2>Artists:</h2>
+      <br>
+        <section class="songs">
+            {% for element in artists['items'] %}
+            <button type="submit" name='song_id' value="{{element['id']}}" class="song">
+                <img src="{{element['images'][2]['url']}}" height="100px" width="100px">
+                <div class="text">
+                    <h4>Artist Name: {{element['name']}}</h4>
+                </div>
+            </button>
+            {% endfor %}
+          </section>
+        <h2>Tracks:</h2>
+        <br>
+        <section class="songs">
+            {% for element in tracks['items'] %}
+            <button name='song_id' value="{{ element['preview_url'] }}" class="song">
+                <img src="{{ element['album']['images'][2]['url'] }}" height="100px" width="100px">
+                <div class="text">
+                    <h4 class="artist">Artist: {{ element['artists'][0]['name'] }}</h4>
+                    <h4 class="track-name">Track Name: {{ element['name'] }}</h4>
+                </div>
+            </button>
+            {% endfor %}
+          </section>
+</section>
+{% endblock %}

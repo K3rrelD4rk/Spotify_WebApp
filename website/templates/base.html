@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="icon" href="/static/img/icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"  crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/login_register_style.css">
+  <link rel='stylesheet' href="/static/css/audio.css">
+  <script src="static/js/index.js">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <section class="menu-section" id = "menu-section">
+    <header>
+      <nav>
+          <ul class="menuItems">
+
+              {% if current_user.is_authenticated %}
+                <div>
+                  <li><a href='/' role="button"><img src="static/img/icon.png" height="50px" width="50px"></a></li>
+                  <li><a href='/home' data-item='Home' onclick="">Home</a></li>
+                  <li><a href='/library'  id="libreria" data-item='La tua libreria' role="button">La tua libreria</a></li>
+                </div>
+                <div>
+                  <li>
+                    <div class="search-container">
+                     <form method="post" action='/search'>
+                        <input type="text" placeholder="Search.." id="Search-Bar" name="title">
+                        <button type="submit"><i class="fa fa-search" href='/search'></i></button>
+                      </form>
+                    </div>
+                  </li>
+                  <li>
+                    <a href='/logout'><button class="button-21" class="libcerca" id="accedi">Logout</button></a>
+                  </li>
+                </div>
+              {% else %}
+                <div>
+                  <li><a href='/' data-item='Red Hot Groove' role="button">Red Hot Groove</a></li>
+                </div>
+                <div>
+                  <li>
+                    <a href='/login'><button class="button-21" class="libcerca" id="accedi">Sign In</button></a>
+                  </li>
+                </div>
+              {% endif %}
+            </div>
+          </ul>
+        </nav>
+  </header>
+</section>
+<body style="text-align: center;">
+<div class="content">
+<div class="container">
+{% with messages = get_flashed_messages(with_categories=true) %} 
+{% if messages %} {% for category, message in messages %}
+{% if category == 'error' %}
+  <div class="alert alert-danger alter-dismissable fade show" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% else %}
+  <div class="alert alert-success alter-dismissable fade show" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endif %} {% endfor %} {% endif %} {% endwith %}
+</div>
+{% block content %}
+{% endblock %}
+</div>
+{% if current_user.is_authenticated %}
+<div class="container">
+  <audio id="audio" preload="auto">
+      <source src="static/audio/thunderstruck.mp3" type="audio/mpeg">
+  </audio>
+</div>
+<div class="player">
+  <h2>Thunderstruck</h2>
+  <h3>AC/DC</h3>
+  <div class="controls">
+      <button class="prev" type="submit" name="action" value="previous">⏮</button>
+      <button class="play-pause" id="play-pause" name="action" type="button">
+          <span class="play-icon" role="img" aria-label="Play">▶️</span>
+          <span class="pause-icon" role="img" aria-label="Pause" style="display: none;">⏸️</span>
+      </button>
+      <button class="next" type='submit' name="action" value="next">⏭</button>
+  </div>
+  <div class="progress">
+      <div class="progress-bar"></div>
+      <div class="progress-dot"></div> <!-- Pallino della barra di progresso -->
+  </div>
+  <div class="time">
+      <span class="current-time">0:00</span>
+      <span class="total-time">0:00</span>
+  </div>
+</div>
+{% endif %}
+</body>
+</html>

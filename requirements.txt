@@ -1,0 +1,8 @@
+flask
+requests
+dotenv
+flask-sqlalchemy
+flask-login
+youtube-search-python
+pytube
+youtube-search

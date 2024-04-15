@@ -1,0 +1,105 @@
+.container {
+    display: none; /* Nasconde il container per l'audio */
+  }
+  
+  .player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgb(117, 65, 30);
+    background: linear-gradient(rgba(238, 126, 21, 0.5), rgb(117, 65, 30));
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3); /* Ombra più pronunciata */
+    transition: box-shadow 0.3s ease; /* Aggiungi una transizione all'ombra */
+  }
+  
+  .player:hover {
+    box-shadow: 0 -6px 10px rgba(0, 0, 0, 0.5); /* Effetto rilievo al passaggio del mouse */
+  }
+  
+
+.player:hover {
+  box-shadow: 0 -6px 10px rgba(0, 0, 0, 0.5); /* Effetto rilievo al passaggio del mouse */
+}
+  
+  .player h2 {
+    font-size:large;
+    margin-bottom: 5px;
+  }
+  
+  .player .controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .player .controls button {
+    background-color: #1DB954;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px; /* Riduce la dimensione dei pulsanti di controllo */
+    height: 30px; /* Riduce la dimensione dei pulsanti di controllo */
+    margin: 0 5px; /* Riduce lo spazio tra i pulsanti di controllo */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .player .controls button:hover {
+    background-color: #1ed760;
+  }
+  
+  .player .progress {
+    background-color: #888888;
+    height: 5px; /* Altezza della barra di progresso */
+    border-radius: 2px;
+    margin-top: 5px; /* Riduce lo spazio superiore della barra di progresso */
+    position: relative;
+  }
+  
+  .player .progress .progress-bar {
+    background-color: #1DB954;
+    height: 100%;
+    border-radius: 2px;
+  }
+  
+  .player .progress .progress-dot {
+    position: absolute;
+    top: -6px; /* Posiziona il pallino sopra la barra di progresso */
+    width: 12px; /* Dimensione del pallino */
+    height: 12px; /* Dimensione del pallino */
+    background-color: #1DB954;
+    border-radius: 50%;
+    transform: translateX(-50%); /* Centra il pallino rispetto al punto della canzone */
+  }
+  
+  .player .time {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px; /* Riduce lo spazio superiore degli orari */
+    font-size: 12px; /* Riduce la dimensione del testo degli orari */
+  }
+  
+/* Nascondi l'icona di pausa di default */
+.pause-icon {
+  display: none;
+}
+
+/* Mostra l'icona di pausa quando l'audio è in riproduzione */
+.playing .pause-icon {
+  display: inline;
+}
+
+/* Nascondi l'icona di play quando l'audio è in riproduzione */
+.playing .play-icon {
+  display: none;
+}
+
+/* Stile generale del pulsante play-pause */
+.play-pause {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}

@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block title%} Sign up {% endblock %}
+{% block content %}
+<form method='post'>
+<section class="login-register" id="login-register">
+    <!--Register Page-->
+    <div class="signup" id="signup"> 
+        <div class="content"> 
+         <h2>Sign up</h2> 
+         <div class="form"> 
+           <div class="inputBox"> 
+            <input type="text" name="username" required> <i>Username</i> 
+           </div>
+          <div class="inputBox"> 
+           <input type="email" name="email" required> <i>Email</i> 
+          </div>
+          <div class="inputBox"> 
+           <input type="password" name="password" required> <i>Password</i> 
+          </div> 
+          <div class="links"><a href='/login' id="signup_button">Already Logged in?</a> 
+          </div> 
+          <div class="inputBox"> 
+           <input type="submit" value="Register"> 
+          </div> 
+         </div> 
+        </div> 
+      </div> 
+</section>
+</form>
+{% endblock%}

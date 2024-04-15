@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Library{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="/static/css/library.css">
+<section class="library" >
+    <section class="user_profile_sp" style="padding-bottom: 50px;">
+      <img id='user_image' src='{{img_url}}' height="{{img_height}}" width="{{img_width}}">
+      <h1 style="color: blueviolet; padding-left: 50px;">
+        User {{username}} is connected to {{user_name}}
+      </h1>
+    </section>
+    <section id="playlists">
+      <div class="playlist">
+        <form action="/get_playlist" method="post">
+          <button type="submit" name="id" value="offline_songs" class="playlist">
+            <img src="static/img/icon2.jpg" alt="" height="200px" width='200px'>
+            <h2 id="playlist_name">Offline_Songs</h2>
+          </button>
+      {% for element in playlists %}
+            <button type="submit" name="id" value="{{element['id']}}" class="playlist">
+              <img src="{{element['images'][0]['url']}}" alt="" height="200px" width='200px'>
+              <h2 id="playlist_name">{{element['name']}}</h2>
+            </button>
+      {% endfor %}
+        </form>
+      </div>
+    </section>
+</section>
+{% endblock %}
