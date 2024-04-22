@@ -1,4 +1,4 @@
-from .api import api_base_url, get_yt_url
+from .api import api_base_url
 from datetime import datetime
 from requests import get
 from flask_login import current_user
@@ -23,7 +23,7 @@ def get_tracks():
         response = get(url, headers=headers)
         results = response.json()
         for element in results['tracks']['items']:
-            element['preview_url'] = get_yt_url(element['name'] + element['artists'][0]['name'])
+            element['preview_url'] = 'None'
             
     return render_template("search.html", user=current_user, tracks=results['tracks'], artists=results['artists'], query=title)
     #return jsonify(results)

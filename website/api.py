@@ -1,11 +1,8 @@
 from datetime import datetime
-from typing import final
 from dotenv import load_dotenv
 from flask_login import current_user
 from requests import get, post
-from youtubesearchpython import VideosSearch
 import os
-from pytube import YouTube
 from . import app
 import urllib.parse
 from flask import jsonify, request, redirect, session, Blueprint, render_template, flash, url_for
@@ -134,7 +131,7 @@ def get_playlist():
             response = get(url, headers=headers)
             playlist = response.json()
             for element in playlist['tracks']['items']:
-                element['track']['preview_url'] = get_yt_url(element['track']['name'] + " " + element['track']['artists'][0]['name'])
+                element['track']['preview_url'] = 'None'
     
     return render_template('playlist.html', user=current_user, playlist=playlist)
     #return jsonify(playlist)
@@ -221,22 +218,7 @@ def offline_songs():
                 })
     return offline_songs
 
-def get_yt_url(title):
-    videos_search = VideosSearch(title, limit=1)
-     
-    try:
-        # Cerca il video su YouTube
-        videos_search = VideosSearch(title, limit=1)
-        # Ottieni il primo risultato (se presente)
-        result = videos_search.result()['result'][0]
-        # Ottieni l'URL del video
-        video_url = result['link']
-        yt = YouTube(video_url)
-        audio_url = yt.streams.filter(only_audio=True).first()
-        return audio_url.url
-    except Exception as e:
-        flash("Error during search", category='error')
-        return None
+
 
 @api.route('/get_tops', methods=['GET', 'POST'])
 def get_tops():
@@ -252,7 +234,7 @@ def get_tops():
         if playlist_id == 'top_tracks':
             playlist = get_top_tracks()
             for element in playlist['tracks']['items']:
-                element['track']['preview_url'] = get_yt_url(element['track'][0]['name'] + " " + element['track']['artists'][0]['name'])
+                element['track']['preview_url'] = 'None'
         else:
             url = api_base_url + 'artists/'+ playlist_id
             final_url = url + '/top-tracks'
@@ -285,7 +267,7 @@ def get_tops():
                                     ]
                     },
                     "name" : element['name'],
-                    "preview_url" :  get_yt_url(element['name'] + " " + element['album']['artists'][0]['name'])                
+                    "preview_url" :  'None'                
                 }})
                 
             
